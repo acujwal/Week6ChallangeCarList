@@ -21,7 +21,7 @@ public class Car {
     private String model;
 
     @NotNull
-    private int year;
+    private String  year;
 
     @NotNull
     private int msrp;
@@ -31,13 +31,6 @@ public class Car {
 
     private String image;
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public long getId() {
         return id;
@@ -63,11 +56,11 @@ public class Car {
         this.model = model;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -85,5 +78,13 @@ public class Car {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

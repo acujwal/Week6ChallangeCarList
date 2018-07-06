@@ -11,7 +11,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
 
     <a class="navbar-brand" href="/">
-        <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="img/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
         AC Car Dealer
     </a>
    <!-- <a class="navbar-brand" href="list.html">AC Car Dealer</a>-->
@@ -43,48 +43,63 @@
 <div class="container jumbotron">
 
     <h1>Add Car Here !!</h1><br><br/>
-<form th:action="@{/processCar}" th:object="${car}" method="post" enctype="multipart/form-data" action="#">
+<form action="#"
+      th:action="@{/processCar}"
+      th:object="${car}"
+      method="POST" enctype="multipart/form-data" >
+
     <input type="hidden" th:field="*{id}"/>
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Manufacture</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  placeholder="Company Name">
+            <input type="text" class="form-control"  placeholder="Brand Name" th:field="*{manufacture}">
+            <span th:if="${#fields.hasErrors('manufacture')}" th:errors="*{manufacture}"></span> <br/>
+            <br/>
         </div>
     </div>
 
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Model</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Car Model">
+            <input type="text" class="form-control" placeholder="Car Model" th:field="*{model}">
+            <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span>
+            <br/>
         </div>
     </div>
 
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Year</label>
         <div class="col-sm-10">
-            <input type="number" min="1900" max="2019" class="form-control"  placeholder="Year of Manufacture">
+            <input type="number" min="1900" max="2019" class="form-control"  placeholder="Year of Manufacture" th:field="*{year}">
+            <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+            <br/>
         </div>
     </div>
 
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">MSRP</label>
         <div class="col-sm-10">
-            <input type="number" class="form-control"  placeholder="Amount Total">
+            <input type="number" class="form-control"  placeholder="Amount Total" th:field="*{msrp}">
+            <span th:if="${#fields.hasErrors('msrp')}" th:errors="*{msrp}"></span>
+            <br/>
         </div>
     </div>
 
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Category</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  placeholder="Types of Car">
+            <input type="text" class="form-control"  placeholder="Types of Car" th:field="*{category}">
+            <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+            <br/>
         </div>
     </div>
 
     <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Add Car Image</label>
                 <div class="col-sm-10">
-                    <input type="file" name="file" class="form-control" />
-
+                    <input type="file" name="file" class="form-control" th:field="*{image}" />
+                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                    <br/>
                 </div>
     </div>
     <input type="submit" name="Submit"/>

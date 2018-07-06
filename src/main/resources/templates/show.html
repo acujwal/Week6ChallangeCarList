@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<nav th:replace="base :: main-navbar" class="navbar navbar-expand-lg navbar-light bg-info">
 
     <a class="navbar-brand" href="/">
         <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -40,6 +40,28 @@
         </form>
     </div>
 </nav>
+
+
+<div class="container jumbotron">
+    <div class="row">
+        <div class="col-3">&nbsp;</div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header" th:text="${car.topCaption}"></div>
+                <img th:src="${car.pictureUrl}" width="100%"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${car.bottomCaption}"></h5>
+                    <p class="card-text" th:text="${car.description}"></p>
+
+                    <small th:text="${car.postDate}"></small> <br/>
+                    <a class="btn btn-info btn-sm" th:href="@{/update/{id}(id=${car.id})}">Update</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${car.id})}">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">&nbsp;</div>
+    </div>
+</div>
 
 
 

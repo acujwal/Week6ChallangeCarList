@@ -31,29 +31,47 @@ public class HomeController {
         model.addAttribute("car", new Car());
         return "carform";
     }
+
     @PostMapping("/processCar")
-    public String processActor(@ModelAttribute Car car,
-                               @RequestParam("file")MultipartFile file){
-        if(file.isEmpty()){
+    public String processCar(@ModelAttribute Car car,
+                               @RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
             return "redirect:/add";
         }
-        try{
-            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("car", "auto"));
             car.setImage(uploadResult.get("url").toString());
             carRepository.save(car);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/add";
         }
         return "redirect:/";
-
     }
 
     @GetMapping("/addcategory")
-    public String addCategory(Model model){
-        model.addAttribute("category",new Category());
+    public String addCategory(Model model) {
+        model.addAttribute("category", new Category());
         return "category";
     }
+
+    @RequestMapping("/detail/{id}")
+    public String showcar(@PathVariable("id") long id, Model model) {
+        model.addAttribute("car", carRepository.findById(id).get());
+        return "show";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updatecar(@PathVariable("id") long id, Model model) {
+        model.addAttribute("car", carRepository.findById(id));
+        return "form";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deletecar(@PathVariable("id") long id) {
+        carRepository.deleteById(id);
+        return "redirect:/";
+    }
+
 
 }
