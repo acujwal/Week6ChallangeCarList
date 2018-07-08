@@ -8,102 +8,104 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
 
-    <a class="navbar-brand" href="/">
-        <img src="img/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
-        AC Car Dealer
-    </a>
-   <!-- <a class="navbar-brand" href="list.html">AC Car Dealer</a>-->
+        <a class="navbar-brand" href="/">
+            <img src="img/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+            AC Car Dealer
+        </a>
+       <!-- <a class="navbar-brand" href="list.html">AC Car Dealer</a>-->
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="/"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="/"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/add">Add Car</a>
-            </li>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add">Add Car</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link category" href="/addcategory">Add Category</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Car" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search Car</button>
-        </form>
-    </div>
-</nav>
+                <li class="nav-item">
+                    <a class="nav-link category" href="/addcategory">Add Category</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Car" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search Car</button>
+            </form>
+        </div>
+    </nav>
 <div class="container jumbotron">
 
     <h1>Add Car Here !!</h1><br><br/>
-<form action="#"
-      th:action="@{/processCar}"
-      th:object="${car}"
-      method="POST" enctype="multipart/form-data" >
+        <form action="#"
+              th:action="@{/processCar}"
+              th:object="${car}"
+              method="POST" enctype="multipart/form-data" >
 
-    <input type="hidden" th:field="*{id}"/>
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Manufacture</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control"  placeholder="Brand Name" th:field="*{manufacture}">
-            <span th:if="${#fields.hasErrors('manufacture')}" th:errors="*{manufacture}"></span> <br/>
-            <br/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Model</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Car Model" th:field="*{model}">
-            <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span>
-            <br/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Year</label>
-        <div class="col-sm-10">
-            <input type="number" min="1900" max="2019" class="form-control"  placeholder="Year of Manufacture" th:field="*{year}">
-            <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
-            <br/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">MSRP</label>
-        <div class="col-sm-10">
-            <input type="number" class="form-control"  placeholder="Amount Total" th:field="*{msrp}">
-            <span th:if="${#fields.hasErrors('msrp')}" th:errors="*{msrp}"></span>
-            <br/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Category</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control"  placeholder="Types of Car" th:field="*{category}">
-            <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
-            <br/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Add Car Image</label>
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Manufacture</label>
                 <div class="col-sm-10">
-                    <input type="file" name="file" class="form-control" th:field="*{image}" />
-                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                    <input type="text" class="form-control"  placeholder="Brand Name" th:field="*{manufacture}">
+
                     <br/>
                 </div>
-    </div>
-    <input type="submit" name="Submit"/>
-</form>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Model</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Car Model" th:field="*{model}">
+
+                    <br/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+                    <input type="number" min="1900" max="2019" class="form-control"  placeholder="Year of Manufacture" th:field="*{year}">
+
+                    <br/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">MSRP</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control"  placeholder="Amount Total" th:field="*{msrp}">
+
+                    <br/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10">
+                    <select class="form-control" th:field="*{category}">
+                        <option value="">--</option>
+                        <option th:each="category :${categories}" th:text="${category.carCategory}" th:value="${category.id}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Add Car Image</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" class="form-control" />
+
+                            <br/>
+                        </div>
+            </div>
+
+            <input type="submit" name="Submit"/>
+        </form>
 </div>
 
 

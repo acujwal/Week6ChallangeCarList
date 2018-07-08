@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.GeneratedValue;
 import java.io.IOException;
 import java.util.Map;
 
@@ -20,26 +19,30 @@ public class HomeController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    CategoryRepository categoryRepository;
     @RequestMapping("/")
     public String listofcar(Model model) {
         model.addAttribute("cars", carRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "list";
     }
 
-    @GetMapping("/add")
+    @RequestMapping("/add")
     public String newCar(Model model) {
         model.addAttribute("car", new Car());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "carform";
     }
 
     @PostMapping("/processCar")
-    public String processCar(@ModelAttribute Car car,
-                               @RequestParam("file") MultipartFile file) {
+    public String processCar(@ModelAttribute("car") Car car,
+                             @RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return "redirect:/add";
         }
         try {
-            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("car", "auto"));
+            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
             car.setImage(uploadResult.get("url").toString());
             carRepository.save(car);
         } catch (IOException e) {
@@ -49,12 +52,17 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/addcategory")
+    @RequestMapping("/addcategory")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         return "category";
     }
 
+    @PostMapping("/processCategory")
+    public String processCategory(@ModelAttribute("category") Category category){
+        categoryRepository.save(category);
+        return "redirect:/";
+    }
     @RequestMapping("/detail/{id}")
     public String showcar(@PathVariable("id") long id, Model model) {
         model.addAttribute("car", carRepository.findById(id).get());
@@ -64,7 +72,8 @@ public class HomeController {
     @RequestMapping("/update/{id}")
     public String updatecar(@PathVariable("id") long id, Model model) {
         model.addAttribute("car", carRepository.findById(id));
-        return "form";
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "carform";
     }
 
     @RequestMapping("/delete/{id}")

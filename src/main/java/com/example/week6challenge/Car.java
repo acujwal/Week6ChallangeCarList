@@ -14,19 +14,19 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
+
     private String manufacture;
 
-    @NotNull
+
     private String model;
 
-    @NotNull
+
     private String  year;
 
-    @NotNull
+
     private int msrp;
 
-    @NotNull
+
     private String category;
 
     private String image;

@@ -43,18 +43,18 @@
 <div class="container jumbotron">
 
     <h1>Add Category !!</h1><br><br/>
-    <form>
+    <form th:object="${category}" th:action="@{/processCategory}" method="post" action="#">
         <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2 col-form-label">Add Category</label>
+            <label  class="col-sm-2 col-form-label">Add Category</label>
 
-            <div th:each="car : ${category}" class="col-sm-10">
+            <div  class="col-sm-10">
                 <div>
-                    <input type="text" class="form-control" id="colFormLabel" placeholder="Category of car">
+                    <input type="text" class="form-control" th:field="*{carCategory}" placeholder="Category of car">
                 </div>
             </div>
         </div>
 
-        <input class="bg-info" type="submit" name="Submit"/>
+        <input class="bg-info" type="submit" value="Submit"/>
     </form>
 </div>
 
